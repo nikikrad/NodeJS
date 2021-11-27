@@ -1,4 +1,4 @@
-const { request } = require('express')
+// const { request } = require('express')
 const express = require('express')
 const mysql = require('mysql')
 const router = express.Router()
@@ -19,17 +19,17 @@ router.get("/", (req,res) => {
     console.log("Fetching all sponsors")
     const connection = getConnection()
   
-    const queryString = "SELECT * FROM Sponsor"//query - запрос
+    const queryString = "SELECT * FROM Sponsors"//query - запрос
     connection.query(queryString, (error, rows, fields) => {
       if (error) {
-        console.log("Failed to query for Sponsor: " + error)
+        console.log("Failed to query for Sponsors: " + error)
         res.sendStatus(500)//200 and 300 - norm
         res.end()
       }
       
       const sponsors = rows.map((row) => {//rows - ответ гет запроса
         return {
-          id: row.idSponsor,
+          id: row.idSponsors,
           name: row.name,
           number: row.number,
           mail: row.mail
@@ -44,7 +44,7 @@ router.get("/", (req,res) => {
   router.post("/create", (req, res) => {
     const connection = getConnection()
   
-    const queryString = "INSERT INTO `sponsor` (name, number, mail) VALUES (?, ?, ?)"
+    const queryString = "INSERT INTO `sponsors` (name, number, mail) VALUES (?, ?, ?)"
     getConnection().query(queryString, [req.body.name, req.body.number, req.body.mail], (err, results, fields) => {
       if (err) {
         console.log(err)
@@ -59,7 +59,7 @@ router.get("/", (req,res) => {
     console.log("Fetching client with id:" + req.params.id)
     const connection = getConnection()
 
-    const queryString = "Select * FROM `Sponsor` WHERE idSponsor = ?"
+    const queryString = "Select * FROM `Sponsors` WHERE idSponsors = ?"
   
     connection.query(queryString, [req.params.id], (error, rows, fields) => {
       if (error) {
@@ -76,7 +76,7 @@ router.get("/", (req,res) => {
   router.put("/update/:id", (req, res) => {
     const connection = getConnection()
   
-    const queryString = "UPDATE `Sponsor` SET name = ?, number = ?, mail = ? WHERE idSponsor = ?"
+    const queryString = "UPDATE `Sponsors` SET name = ?, number = ?, mail = ? WHERE idSponsors = ?"
     getConnection().query(queryString, [req.body.name, req.body.number, req.body.mail, req.params.id], (err, results, fields) => {
       if (err) {
         console.log(err)
@@ -90,10 +90,11 @@ router.get("/", (req,res) => {
   router.delete("/delete/:id", (req, res) =>{
     const connection = getConnection()
 
-    const queryString = "DELETE FROM `Sponsor` WHERE idSponsor = ?"
+    const queryString = "DELETE FROM `Sponsors` WHERE idSponsors = ?"
   
     connection.query(queryString, [req.params.id], (error, rows, fields) => {
       if (error) {
+        console.log(error)
         res.sendStatus(500)
       }
       res.end()
