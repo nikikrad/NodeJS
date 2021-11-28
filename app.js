@@ -7,6 +7,7 @@ const sponsorRoutes = require('./routes/Sponsors')//routes - путь
 const employeesRoutes = require('./routes/Employees')
 const eventsRoutes = require('./routes/Events')
 const sportclubsRoutes = require('./routes/SportClubs')//SportClubs
+const positionsRoutes = require('./routes/Positions')
 
 // // types of accessories, payment methods, delivery methods are filled locally in database
 
@@ -19,6 +20,7 @@ app.use('/sponsors', sponsorRoutes)
 app.use('/employees', employeesRoutes)
 app.use('/events', eventsRoutes)
 app.use('/sportclubs', sportclubsRoutes)
+app.use('/positions', positionsRoutes)
 
 
 app.get("/", (req, res) => {
