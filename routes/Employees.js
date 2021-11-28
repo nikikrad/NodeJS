@@ -48,8 +48,8 @@ router.get("/", (req,res) => {
   router.post("/create", (req, res) => {
     const connection = getConnection()
     console.log(req.body.idPositions)
-    const queryString = "INSERT INTO employees (name, surname, lastname, idPositions) VALUES (?, ?, ?, ?)"
-    getConnection().query(queryString, [req.body.name,  req.body.surname, req.body.lastname, req.body.idPositions], (err, results, fields) => {
+    const queryString = "INSERT INTO employees (name, surname, lastname, idPositions, idSportClubs) VALUES (?, ?, ?, ?, ?)"
+    getConnection().query(queryString, [req.body.name,  req.body.surname, req.body.lastname, req.body.idPositions, req.body.idSportClubs], (err, results, fields) => {
       if (err) {
         console.log(err)
         res.sendStatus(500)
@@ -63,7 +63,7 @@ router.get("/", (req,res) => {
     console.log("Fetching employees with id:" + req.params.id)
     const connection = getConnection()
 
-    const queryString = "Select * FROM `employees` WHERE employees_id = ?"
+    const queryString = "Select * FROM `Employees` WHERE idEmployees = ?"
   
     connection.query(queryString, [req.params.id], (error, rows, fields) => {
       if (error) {
@@ -80,8 +80,8 @@ router.get("/", (req,res) => {
   router.put("/update/:id", (req, res) => {
     const connection = getConnection()
   
-    const queryString = "UPDATE `employees` SET first_name = ?, last_name = ?, middle_name = ?, address = ?, phone_number = ?, email = ?, position_id = ? WHERE employees_id = ?"
-    getConnection().query(queryString, [req.body.first_name,  req.body.last_name, req.body.middle_name, req.body.address, req.body.phone_number, req.body.email, req.body.position_id, req.params.id], (err, results, fields) => {
+    const queryString = "UPDATE `Employees` SET name = ?, surname = ?, lastname = ?, idPosition = ?, idSportClubs WHERE idEmployees = ?"
+    getConnection().query(queryString, [req.body.name,  req.body.surname, req.body.lastname, req.body.idPosition, req.body.idSportClubs, req.params.id], (err, results, fields) => {
       if (err) {
         console.log(err)
         res.sendStatus(500)
@@ -95,7 +95,7 @@ router.get("/", (req,res) => {
     const connection = getConnection()
 
     const orderId = req.params.id
-    const queryString = "DELETE FROM `employees` WHERE employees_id = ?"
+    const queryString = "DELETE FROM `Employees` WHERE idEmployees = ?"
   
     connection.query(queryString, [req.params.id], (error, rows, fields) => {
       if (error) {

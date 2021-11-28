@@ -36,12 +36,12 @@ router.get("/", (req,res) => {
         }
       })
   
-      console.log("I think we fetched sportclubs successfully")
+      console.log("I think we fetched SportClubs successfully")
       res.json(sportclubs)//res - ответ
     })
   })
 
-  router.post("/create", (req, res) => {
+  router.post("/create", (req, res) => {//is ready
     const connection = getConnection()
   
     const queryString = "INSERT INTO `SportClubs` (addres, number, mail) VALUES (?, ?, ?)"
@@ -73,7 +73,7 @@ router.get("/", (req,res) => {
     })
   })
 
-  router.put("/update/:id", (req, res) => {
+  router.put("/update/:id", (req, res) => {//is ready
     const connection = getConnection()
   
     const queryString = "UPDATE `SportClubs` SET addres = ?, number = ?, mail = ? WHERE idSportClubs = ?"
@@ -87,7 +87,7 @@ router.get("/", (req,res) => {
     })
   })
 
-  router.delete("/delete/:id", (req, res) =>{
+  router.delete("/delete/:id", (req, res) =>{//is ready
     const connection = getConnection()
 
     const queryString = "DELETE FROM `SportClubs` WHERE idSportClubs = ?"
