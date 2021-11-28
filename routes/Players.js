@@ -19,7 +19,7 @@ router.get("/", (req,res) => {
     console.log("Fetching all Players")
     const connection = getConnection()
   
-    const queryString = "SELECT * FROM Players JOIN Disch ON Disch.idDisch = Players.idDisch, KindOfSports ON KindOfSports.idKindOfSports = Players.idKindOfSports, Rolls ON Rolls.idRolls = Players.idRolls"
+    const queryString = "SELECT * FROM Players"
     connection.query(queryString, (error, rows, fields) => {
       if (error) {
         console.log("Failed to query for Players: " + error)
@@ -27,17 +27,18 @@ router.get("/", (req,res) => {
         res.end()
       }
       
-      const players = rows.map((row) => {//rows - ответ гет запроса
+      const players = rows.map((row) => {
         return {
           id: row.idPlayers,
           name: row.name,
           surname: row.surname,
           lastname: row.lastname,
-          idDisch: row.idDisch,
+          idDischs: row.idDischs,
           Disch: {
-            idDisch: row.idDisch,
+            idDischs: row.idDischs,
             disch: row.disch
           },
+          idTeams: row.teams,
           idKindOfSports: row.idKindOfSports,
           KindOfSports: {
             idKindOfSports: row.idKindOfSports,
@@ -52,15 +53,15 @@ router.get("/", (req,res) => {
       })
   
       console.log("I think we fetched Players successfully")
-      res.json(players)//res - ответ
+      res.json(players)
     })
   })
 
   router.post("/create", (req, res) => {
     const connection = getConnection()
 
-    const queryString = "INSERT INTO `Players` (name, surname, lastname, idDisch, idKindOfSports, idRolls) VALUES (?, ?, ?, ?, ?, ?)"
-    getConnection().query(queryString, [req.body.name, req.body.surname, req.body.lastname, req.body.idDisch, req.body.idKindOfSports, req.body.idRolls], (err, results, fields) => {
+    const queryString = "INSERT INTO `Players` (name, surname, lastname, idDischs, idTeams, idKindOfSports, idRolls) VALUES (?, ?, ?, ?, ?, ?, ?)"
+    getConnection().query(queryString, [req.body.name, req.body.surname, req.body.lastname, req.body.idDischs, req.body.idTeams, req.body.idKindOfSports, req.body.idRolls], (err, results, fields) => {
       if (err) {
         console.log(err)
         res.sendStatus(500)
@@ -88,11 +89,11 @@ router.get("/", (req,res) => {
     })
   })
 
-  router.put("/update/:id", (req, res) => {
+  router.put("/update/:id", (req, res) => {//is not ready
     const connection = getConnection()
   
-    const queryString = "UPDATE `Players` SET  name = ?, surname = ?, lastname = ?, idDisch = ?, idKindOfSports = ?, idRolls = ? WHERE idPlayers = ?"
-    getConnection().query(queryString, [req.body.name, req.body.surname, req.body.lastname, req.body.idDisch, req.body.idKindOfSports, req.body.idRolls, req.params.id], (err, results, fields) => {
+    const queryString = "UPDATE `Players` SET  name = ?, surname = ?, lastname = ?, idDischs = ?, idTeams = ?, idKindOfSports = ?, idRolls = ? WHERE idPlayers = ?"
+    getConnection().query(queryString, [req.body.name, req.body.surname, req.body.lastname, req.body.idDischs, req.body.idTeams, req.body.idKindOfSports, req.body.idRolls, req.params.id], (err, results, fields) => {
       if (err) {
         console.log(err)
         res.sendStatus(500)
@@ -102,7 +103,7 @@ router.get("/", (req,res) => {
     })
   })
 
-  router.delete("/delete/:id", (req, res) =>{
+  router.delete("/delete/:id", (req, res) =>{//is ready
     const connection = getConnection()
 
     const queryString = "DELETE FROM `Players` WHERE idPlayers = ?"
