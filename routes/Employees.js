@@ -38,7 +38,7 @@ router.get("/", (req,res) => {
             idPositions: row.idPositions,
             positionname: row.positionname
           }
-        }
+        } 
       })
   
       console.log("I think we fetched employees successfully")

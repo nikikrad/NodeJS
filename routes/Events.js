@@ -16,36 +16,36 @@ function getConnection() {
 }
 
 router.get("/", (req,res) => {
-    console.log("Fetching all sponsors")
+    console.log("Fetching all events")
     const connection = getConnection()
   
-    const queryString = "SELECT * FROM Sponsors"//query - запрос
+    const queryString = "SELECT * FROM Events"//query - запрос
     connection.query(queryString, (error, rows, fields) => {
       if (error) {
-        console.log("Failed to query for Sponsors: " + error)
+        console.log("Failed to query for Events: " + error)
         res.sendStatus(500)//200 and 300 - norm
         res.end()
       }
       
-      const sponsors = rows.map((row) => {//rows - ответ гет запроса
+      const events = rows.map((row) => {//rows - ответ гет запроса
         return {
-          id: row.idSponsors,
-          name: row.name,
-          number: row.number,
-          mail: row.mail
+          id: row.idEvents,
+          sport: row.sport,
+          date: row.date,
+          time: row.time
         }
       })
   
-      console.log("I think we fetched Sponsor successfully")
-      res.json(sponsors)//res - ответ
+      console.log("I think we fetched Events successfully")
+      res.json(events)//res - ответ
     })
   })
 
   router.post("/create", (req, res) => {
     const connection = getConnection()
   
-    const queryString = "INSERT INTO `sponsors` (name, number, mail) VALUES (?, ?, ?)"
-    getConnection().query(queryString, [req.body.name, req.body.number, req.body.mail], (err, results, fields) => {
+    const queryString = "INSERT INTO `Events` (sport, date, time) VALUES (?, ?, ?)"
+    getConnection().query(queryString, [req.body.sport, req.body.date, req.body.time], (err, results, fields) => {
       if (err) {
         console.log(err)
         res.sendStatus(500)
@@ -56,19 +56,19 @@ router.get("/", (req,res) => {
   })
 
   router.get("/:id", (req, res) =>{
-    console.log("Fetching sponsor with id:" + req.params.id)
+    console.log("Fetching event with id:" + req.params.id)
     const connection = getConnection()
 
-    const queryString = "Select * FROM `Sponsors` WHERE idSponsors = ?"
+    const queryString = "Select * FROM `Events` WHERE idEvents = ?"
   
     connection.query(queryString, [req.params.id], (error, rows, fields) => {
       if (error) {
-        console.log("Failed to query for sponsor: " + error)
+        console.log("Failed to query for event: " + error)
         res.sendStatus(500)
         res.end()
       }
   
-      console.log("I think we fetched sponsors successfully")
+      console.log("I think we fetched events successfully")
       res.json(rows)
     })
   })
@@ -76,8 +76,8 @@ router.get("/", (req,res) => {
   router.put("/update/:id", (req, res) => {
     const connection = getConnection()
   
-    const queryString = "UPDATE `Sponsors` SET name = ?, number = ?, mail = ? WHERE idSponsors = ?"
-    getConnection().query(queryString, [req.body.name, req.body.number, req.body.mail, req.params.id], (err, results, fields) => {
+    const queryString = "UPDATE `Events` SET sport = ?, date = ?, time = ? WHERE idEvents = ?"
+    getConnection().query(queryString, [req.body.sport, req.body.date, req.body.time, req.params.id], (err, results, fields) => {
       if (err) {
         console.log(err)
         res.sendStatus(500)
@@ -90,7 +90,7 @@ router.get("/", (req,res) => {
   router.delete("/delete/:id", (req, res) =>{
     const connection = getConnection()
 
-    const queryString = "DELETE FROM `Sponsors` WHERE idSponsors = ?"
+    const queryString = "DELETE FROM `Events` WHERE idEvents = ?"
   
     connection.query(queryString, [req.params.id], (error, rows, fields) => {
       if (error) {
