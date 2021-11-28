@@ -41,11 +41,11 @@ router.get("/", (req,res) => {
     })
   })
 
-  router.post("/create", (req, res) => {
+  router.post("/create", (req, res) => {//is ready
     const connection = getConnection()
   
-    const queryString = "INSERT INTO `sponsors` (name, number, mail) VALUES (?, ?, ?)"
-    getConnection().query(queryString, [req.body.name, req.body.number, req.body.mail], (err, results, fields) => {
+    const queryString = "INSERT INTO `Sponsors` (name, number, mail, idSportClubs) VALUES (?, ?, ?, ?)"
+    getConnection().query(queryString, [req.body.name, req.body.number, req.body.mail, req.body.idSportClubs], (err, results, fields) => {
       if (err) {
         console.log(err)
         res.sendStatus(500)
@@ -73,11 +73,11 @@ router.get("/", (req,res) => {
     })
   })
 
-  router.put("/update/:id", (req, res) => {
+  router.put("/update/:id", (req, res) => {//is ready
     const connection = getConnection()
   
-    const queryString = "UPDATE `Sponsors` SET name = ?, number = ?, mail = ? WHERE idSponsors = ?"
-    getConnection().query(queryString, [req.body.name, req.body.number, req.body.mail, req.params.id], (err, results, fields) => {
+    const queryString = "UPDATE `Sponsors` SET name = ?, number = ?, mail = ?, idSportClubs = ? WHERE idSponsors = ?"
+    getConnection().query(queryString, [req.body.name, req.body.number, req.body.mail, req.body.idSportClubs, req.params.id], (err, results, fields) => {
       if (err) {
         console.log(err)
         res.sendStatus(500)
@@ -87,7 +87,7 @@ router.get("/", (req,res) => {
     })
   })
 
-  router.delete("/delete/:id", (req, res) =>{
+  router.delete("/delete/:id", (req, res) =>{//is ready
     const connection = getConnection()
 
     const queryString = "DELETE FROM `Sponsors` WHERE idSponsors = ?"

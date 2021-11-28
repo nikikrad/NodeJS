@@ -45,7 +45,7 @@ router.get("/", (req,res) => {
     })
   })
 
-  router.post("/create", (req, res) => {
+  router.post("/create", (req, res) => {//is ready
     const connection = getConnection()
     console.log(req.body.idPositions)
     const queryString = "INSERT INTO employees (name, surname, lastname, idPositions, idSportClubs) VALUES (?, ?, ?, ?, ?)"
@@ -77,11 +77,11 @@ router.get("/", (req,res) => {
     })
   })
 
-  router.put("/update/:id", (req, res) => {
+  router.put("/update/:id", (req, res) => {//is ready
     const connection = getConnection()
   
-    const queryString = "UPDATE `Employees` SET name = ?, surname = ?, lastname = ?, idPosition = ?, idSportClubs WHERE idEmployees = ?"
-    getConnection().query(queryString, [req.body.name,  req.body.surname, req.body.lastname, req.body.idPosition, req.body.idSportClubs, req.params.id], (err, results, fields) => {
+    const queryString = "UPDATE `Employees` SET name = ?, surname = ?, lastname = ?, idPositions = ?, idSportClubs = ? WHERE idEmployees = ?"
+    getConnection().query(queryString, [req.body.name,  req.body.surname, req.body.lastname, req.body.idPositions, req.body.idSportClubs, req.params.id], (err, results, fields) => {
       if (err) {
         console.log(err)
         res.sendStatus(500)
@@ -91,7 +91,7 @@ router.get("/", (req,res) => {
     })
   })
 
-  router.delete("/delete/:id", (req, res) =>{
+  router.delete("/delete/:id", (req, res) =>{//is ready
     const connection = getConnection()
 
     const orderId = req.params.id

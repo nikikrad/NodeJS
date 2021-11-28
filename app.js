@@ -9,6 +9,8 @@ const eventsRoutes = require('./routes/Events')
 const sportclubsRoutes = require('./routes/SportClubs')//SportClubs
 const positionsRoutes = require('./routes/Positions')
 const teamsRoutes = require('./routes/Teams')//teamsRoutes
+const playersRoutes = require('./routes/Players')
+
 // // types of accessories, payment methods, delivery methods are filled locally in database
 
 app.use(morgan('short'))
@@ -22,7 +24,7 @@ app.use('/events', eventsRoutes)
 app.use('/sportclubs', sportclubsRoutes)
 app.use('/positions', positionsRoutes)
 app.use('/teams', teamsRoutes)
-
+app.use('/players', playersRoutes)
 
 app.get("/", (req, res) => {
     console.log("Responding to root route")
