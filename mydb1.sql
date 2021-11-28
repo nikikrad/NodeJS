@@ -89,8 +89,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mydb`.`Disch`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Disch` (
-  `idDisch` INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `mydb`.`Dischs` (
+  `idDischs` INT NOT NULL AUTO_INCREMENT,
   `disch` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idDisch`))
 ENGINE = InnoDB;

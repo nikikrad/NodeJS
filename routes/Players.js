@@ -19,7 +19,7 @@ router.get("/", (req,res) => {
     console.log("Fetching all Players")
     const connection = getConnection()
   
-    const queryString = "SELECT * FROM Players"
+    const queryString = "SELECT * FROM Players JOIN Dischs ON Dischs.idDischs = Players.idDischs JOIN KindOfSports ON KindOfSports.idKindOfSports = Players.idKindOfSports JOIN Rolls ON Rolls.idRolls = Players.idRolls"
     connection.query(queryString, (error, rows, fields) => {
       if (error) {
         console.log("Failed to query for Players: " + error)
@@ -34,7 +34,7 @@ router.get("/", (req,res) => {
           surname: row.surname,
           lastname: row.lastname,
           idDischs: row.idDischs,
-          Disch: {
+          Dischs: {
             idDischs: row.idDischs,
             disch: row.disch
           },
@@ -42,12 +42,12 @@ router.get("/", (req,res) => {
           idKindOfSports: row.idKindOfSports,
           KindOfSports: {
             idKindOfSports: row.idKindOfSports,
-            kindofsports: row.kindofsports
+            kindofsport: row.kindofsport
           },
           idRolls: row.idRolls,
           Rolls: {
             idRolls: row.idRolls,
-            rolls: row.rolls
+            roll: row.roll
           }
         }
       })
@@ -89,7 +89,7 @@ router.get("/", (req,res) => {
     })
   })
 
-  router.put("/update/:id", (req, res) => {//is not ready
+  router.put("/update/:id", (req, res) => {//not ready
     const connection = getConnection()
   
     const queryString = "UPDATE `Players` SET  name = ?, surname = ?, lastname = ?, idDischs = ?, idTeams = ?, idKindOfSports = ?, idRolls = ? WHERE idPlayers = ?"

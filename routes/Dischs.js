@@ -30,7 +30,7 @@ router.get("/", (req,res) => {//is ready
       const dischs = rows.map((row) => {//rows - ответ гет запроса
         return {
           id: row.idDischs,
-          dischs: row.dischs,
+          disch: row.disch,
         }
       })
   
@@ -42,8 +42,8 @@ router.get("/", (req,res) => {//is ready
   router.post("/create", (req, res) => {//is ready
     const connection = getConnection()
   
-    const queryString = "INSERT INTO `Dischs` (dischs) VALUES (?)"
-    getConnection().query(queryString, [req.body.dischs], (err, results, fields) => {
+    const queryString = "INSERT INTO `Dischs` (disch) VALUES (?)"
+    getConnection().query(queryString, [req.body.disch], (err, results, fields) => {
       if (err) {
         console.log(err)
         res.sendStatus(500)
@@ -74,8 +74,8 @@ router.get("/", (req,res) => {//is ready
   router.put("/update/:id", (req, res) => {//is ready
     const connection = getConnection()
   
-    const queryString = "UPDATE `Dischs` SET  dischs = ? WHERE idDischs = ?"
-    getConnection().query(queryString, [req.body.dischs, req.params.id], (err, results, fields) => {
+    const queryString = "UPDATE `Dischs` SET  disch = ? WHERE idDischs = ?"
+    getConnection().query(queryString, [req.body.disch, req.params.id], (err, results, fields) => {
       if (err) {
         console.log(err)
         res.sendStatus(500)

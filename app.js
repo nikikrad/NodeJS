@@ -4,10 +4,10 @@ const morgan = require('morgan')
 const bodyParser = require('body-parser')
 
 const sponsorRoutes = require('./routes/Sponsors')//routes - путь
-const employeesRoutes = require('./routes/Employees')
-const eventsRoutes = require('./routes/Events')
+const employeesRoutes = require('./routes/Employees')//Employees
+const eventsRoutes = require('./routes/Events')//Events
 const sportclubsRoutes = require('./routes/SportClubs')//SportClubs
-const positionsRoutes = require('./routes/Positions')
+const positionsRoutes = require('./routes/Positions')//Positions
 const teamsRoutes = require('./routes/Teams')//teamsRoutes
 const playersRoutes = require('./routes/Players')
 const dischsRoutes = require('./routes/Dischs')//Disch
