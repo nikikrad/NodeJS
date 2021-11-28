@@ -27,7 +27,6 @@ router.get("/", (req,res) => {
       }
       
       const employees = rows.map((row) => {
-        console.log(row.idPosition)
         return {
           idEmployees: row.idEmployees,
           name: row.name,
@@ -48,10 +47,11 @@ router.get("/", (req,res) => {
 
   router.post("/create", (req, res) => {
     const connection = getConnection()
-  
-    const queryString = "INSERT INTO `Employees` (name, surname, middle_name, address, phone_number, email, position_id) VALUES (?, ?, ?, ?, ?, ?, ?)"
-    getConnection().query(queryString, [req.body.first_name,  req.body.last_name, req.body.middle_name, req.body.address, req.body.phone_number, req.body.email, req.body.position_id], (err, results, fields) => {
+    console.log(req.body.idPositions)
+    const queryString = "INSERT INTO employees (name, surname, lastname, idPositions) VALUES (?, ?, ?, ?)"
+    getConnection().query(queryString, [req.body.name,  req.body.surname, req.body.lastname, req.body.idPositions], (err, results, fields) => {
       if (err) {
+        console.log(err)
         res.sendStatus(500)
         return
       }

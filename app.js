@@ -6,6 +6,7 @@ const bodyParser = require('body-parser')
 const sponsorRoutes = require('./routes/Sponsors')//routes - путь
 const employeesRoutes = require('./routes/Employees')
 const eventsRoutes = require('./routes/Events')
+const sportclubsRoutes = require('./routes/SportClubs')//SportClubs
 
 // // types of accessories, payment methods, delivery methods are filled locally in database
 
@@ -17,6 +18,7 @@ app.use(express.static('./public'))
 app.use('/sponsors', sponsorRoutes)
 app.use('/employees', employeesRoutes)
 app.use('/events', eventsRoutes)
+app.use('/sportclubs', sportclubsRoutes)
 
 
 app.get("/", (req, res) => {
