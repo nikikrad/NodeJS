@@ -30,7 +30,7 @@ router.get("/", (req,res) => {
       const positions = rows.map((row) => {//rows - ответ гет запроса
         return {
           id: row.idPositions,
-          positionname: row.positionname,
+          positionName: row.positionName,
         }
       })
   
@@ -42,8 +42,8 @@ router.get("/", (req,res) => {
   router.post("/create", (req, res) => {//ready
     const connection = getConnection()
   
-    const queryString = "INSERT INTO `Positions` (positionname) VALUES (?)"
-    getConnection().query(queryString, [req.body.positionname], (err, results, fields) => {
+    const queryString = "INSERT INTO `Positions` (positionName) VALUES (?)"
+    getConnection().query(queryString, [req.body.positionName], (err, results, fields) => {
       if (err) {
         console.log(err)
         res.sendStatus(500)
@@ -74,8 +74,8 @@ router.get("/", (req,res) => {
   router.put("/update/:id", (req, res) => {//ready
     const connection = getConnection()
   
-    const queryString = "UPDATE `Positions` SET  positionname = ? WHERE idPositions = ?"
-    getConnection().query(queryString, [req.body.positionname, req.params.id], (err, results, fields) => {
+    const queryString = "UPDATE `Positions` SET  positionName = ? WHERE idPositions = ?"
+    getConnection().query(queryString, [req.body.positionName, req.params.id], (err, results, fields) => {
       if (err) {
         console.log(err)
         res.sendStatus(500)
