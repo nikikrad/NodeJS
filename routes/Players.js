@@ -30,9 +30,9 @@ router.get("/", (req,res) => {
       const players = rows.map((row) => {
         return {
           id: row.idPlayers,
-          name: row.name,
-          surname: row.surname,
-          lastname: row.lastname,
+          pFirstName: row.pFirstName,
+          pSurName: row.pSurName,
+          pLastName: row.pLastName,
           idDischs: row.idDischs,
           Dischs: {
             idDischs: row.idDischs,
@@ -60,8 +60,8 @@ router.get("/", (req,res) => {
   router.post("/create", (req, res) => {
     const connection = getConnection()
 
-    const queryString = "INSERT INTO `Players` (name, surname, lastname, idDischs, idTeams, idKindOfSports, idRolls) VALUES (?, ?, ?, ?, ?, ?, ?)"
-    getConnection().query(queryString, [req.body.name, req.body.surname, req.body.lastname, req.body.idDischs, req.body.idTeams, req.body.idKindOfSports, req.body.idRolls], (err, results, fields) => {
+    const queryString = "INSERT INTO `Players` (pFirstName, pSurName, pLastName, idDischs, idTeams, idKindOfSports, idRolls) VALUES (?, ?, ?, ?, ?, ?, ?)"
+    getConnection().query(queryString, [req.body.pFirstName, req.body.pSurName, req.body.pLastName, req.body.idDischs, req.body.idTeams, req.body.idKindOfSports, req.body.idRolls], (err, results, fields) => {
       if (err) {
         console.log(err)
         res.sendStatus(500)
@@ -92,8 +92,8 @@ router.get("/", (req,res) => {
   router.put("/update/:id", (req, res) => {//not ready
     const connection = getConnection()
   
-    const queryString = "UPDATE `Players` SET  name = ?, surname = ?, lastname = ?, idDischs = ?, idTeams = ?, idKindOfSports = ?, idRolls = ? WHERE idPlayers = ?"
-    getConnection().query(queryString, [req.body.name, req.body.surname, req.body.lastname, req.body.idDischs, req.body.idTeams, req.body.idKindOfSports, req.body.idRolls, req.params.id], (err, results, fields) => {
+    const queryString = "UPDATE `Players` SET  pFirstName = ?, pSurName = ?, pLastName = ?, idDischs = ?, idTeams = ?, idKindOfSports = ?, idRolls = ? WHERE idPlayers = ?"
+    getConnection().query(queryString, [req.body.pFirstName, req.body.pSurName, req.body.pLastName, req.body.idDischs, req.body.idTeams, req.body.idKindOfSports, req.body.idRolls, req.params.id], (err, results, fields) => {
       if (err) {
         console.log(err)
         res.sendStatus(500)
