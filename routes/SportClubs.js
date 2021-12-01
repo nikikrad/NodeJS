@@ -30,9 +30,9 @@ router.get("/", (req,res) => {
       const sportclubs = rows.map((row) => {//rows - ответ гет запроса
         return {
           id: row.idSportClubs,
-          addres: row.addres,
-          number: row.number,
-          mail: row.mail
+          sportAddress: row.sportAddress,
+          sportNumber: row.sportNumber,
+          sportMail: row.sportMail
         }
       })
   
@@ -44,8 +44,8 @@ router.get("/", (req,res) => {
   router.post("/create", (req, res) => {//is ready
     const connection = getConnection()
   
-    const queryString = "INSERT INTO `SportClubs` (addres, number, mail) VALUES (?, ?, ?)"
-    getConnection().query(queryString, [req.body.addres, req.body.number, req.body.mail], (err, results, fields) => {
+    const queryString = "INSERT INTO `SportClubs` (sportAddress, sportNumber, sportMail) VALUES (?, ?, ?)"
+    getConnection().query(queryString, [req.body.sportAddress, req.body.sportNumber, req.body.sportMail], (err, results, fields) => {
       if (err) {
         console.log(err)
         res.sendStatus(500)
@@ -76,8 +76,8 @@ router.get("/", (req,res) => {
   router.put("/update/:id", (req, res) => {//is ready
     const connection = getConnection()
   
-    const queryString = "UPDATE `SportClubs` SET addres = ?, number = ?, mail = ? WHERE idSportClubs = ?"
-    getConnection().query(queryString, [req.body.addres, req.body.number, req.body.mail, req.params.id], (err, results, fields) => {
+    const queryString = "UPDATE `SportClubs` SET sportAddress = ?, sportNumber = ?, sportMail = ? WHERE idSportClubs = ?"
+    getConnection().query(queryString, [req.body.sportAddress, req.body.sportNumber, req.body.sportMail, req.params.id], (err, results, fields) => {
       if (err) {
         console.log(err)
         res.sendStatus(500)
