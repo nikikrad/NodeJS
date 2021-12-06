@@ -19,7 +19,7 @@ router.get("/", (req,res) => {
     console.log("Fetching all events")
     const connection = getConnection()
   
-    const queryString = "SELECT * FROM Events"//query - запрос
+    const queryString = "SELECT * FROM Events JOIN SportClubs ON SportClubs.idSportClubs = Events.idSportClubs"
     connection.query(queryString, (error, rows, fields) => {
       if (error) {
         console.log("Failed to query for Events: " + error)
@@ -33,7 +33,11 @@ router.get("/", (req,res) => {
           sport: row.sport,
           date: row.date,
           time: row.time,
-          idSportClubs: row.idSportClubs
+          idSportClubs: row.idSportClubs,
+          SportClubs: {
+            idSportClubs: row.idSportClubs,
+            sportAddress: row.sportAddress
+          },
         }
       })
   
