@@ -29,7 +29,7 @@ router.get("/", (req,res) => {
       
       const sponsors = rows.map((row) => {//rows - ответ гет запроса
         return {
-          id: row.idSponsors,
+          idSponsors: row.idSponsors,
           sponsorName: row.sponsorName,
           sponsorNumber: row.sponsorNumber,
           sponsorMail: row.sponsorMail

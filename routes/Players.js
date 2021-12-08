@@ -29,7 +29,7 @@ router.get("/", (req,res) => {
       
       const players = rows.map((row) => {
         return {
-          id: row.idPlayers,
+          idPlayers: row.idPlayers,
           pFirstName: row.pFirstName,
           pSurName: row.pSurName,
           pLastName: row.pLastName,

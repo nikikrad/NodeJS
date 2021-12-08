@@ -29,7 +29,7 @@ router.get("/", (req,res) => {
       
       const positions = rows.map((row) => {//rows - ответ гет запроса
         return {
-          id: row.idPositions,
+          idPositions: row.idPositions,
           positionName: row.positionName,
         }
       })

@@ -33,10 +33,7 @@ router.get("/", (req,res) => {
           eSurName: row.eSurName,
           eLastName: row.eLastName,
           idPositions: row.idPositions,
-          Position: {
-            idPositions: row.idPositions,
-            positionName: row.positionName
-          }
+          idSportClubs: row.idSportClubs
         } 
       })
   

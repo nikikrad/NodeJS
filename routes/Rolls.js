@@ -29,7 +29,7 @@ router.get("/", (req,res) => {
       
       const rolls = rows.map((row) => {//rows - ответ гет запроса
         return {
-          id: row.idRolls,
+          idRolls: row.idRolls,
           roll: row.roll,
         }
       })
