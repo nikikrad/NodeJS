@@ -30,7 +30,7 @@ router.get("/", (req,res) => {
       const teams = rows.map((row) => {//rows - ответ гет запроса
         return {
           id: row.idTeams,
-          teams: row.teams,
+          teamName: row.teamName,
         }
       })
   
@@ -42,8 +42,8 @@ router.get("/", (req,res) => {
   router.post("/create", (req, res) => {//is ready
     const connection = getConnection()
   
-    const queryString = "INSERT INTO `Teams` (teams, idSportClubs) VALUES (?, ?)"
-    getConnection().query(queryString, [req.body.teams, req.body.idSportClubs], (err, results, fields) => {
+    const queryString = "INSERT INTO `Teams` (teamName, idSportClubs) VALUES (?, ?)"
+    getConnection().query(queryString, [req.body.teamName, req.body.idSportClubs], (err, results, fields) => {
       if (err) {
         console.log(err)
         res.sendStatus(500)
@@ -74,8 +74,8 @@ router.get("/", (req,res) => {
   router.put("/update/:id", (req, res) => {//is ready
     const connection = getConnection()
   
-    const queryString = "UPDATE `Teams` SET  teams = ?, idSportClubs = ? WHERE idTeams = ?"
-    getConnection().query(queryString, [req.body.teams, req.body.idSportClubs, req.params.id], (err, results, fields) => {
+    const queryString = "UPDATE `Teams` SET  teamName = ?, idSportClubs = ? WHERE idTeams = ?"
+    getConnection().query(queryString, [req.body.teamName, req.body.idSportClubs, req.params.id], (err, results, fields) => {
       if (err) {
         console.log(err)
         res.sendStatus(500)
