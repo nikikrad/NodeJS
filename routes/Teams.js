@@ -31,6 +31,7 @@ router.get("/", (req,res) => {
         return {
           idTeams: row.idTeams,
           teamName: row.teamName,
+          idSportClubs: row.idSportClubs
         }
       })
   

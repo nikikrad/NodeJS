@@ -32,8 +32,8 @@ router.get("/", (req,res) => {
           idSponsors: row.idSponsors,
           sponsorName: row.sponsorName,
           sponsorNumber: row.sponsorNumber,
-          sponsorMail: row.sponsorMail
-        }
+          sponsorMail: row.sponsorMail,
+          idSportClubs: row.idSportClubs        }
       })
   
       console.log("I think we fetched Sponsor successfully")
