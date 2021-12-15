@@ -19,7 +19,7 @@ router.get("/", (req,res) => {
     console.log("Fetching all Players")
     const connection = getConnection()
   
-    const queryString = "SELECT * FROM Players JOIN Dischs ON Dischs.idDischs = Players.idDischs JOIN KindOfSports ON KindOfSports.idKindOfSports = Players.idKindOfSports JOIN Rolls ON Rolls.idRolls = Players.idRolls"
+    const queryString = "SELECT * FROM Players"
     connection.query(queryString, (error, rows, fields) => {
       if (error) {
         console.log("Failed to query for Players: " + error)
@@ -34,21 +34,9 @@ router.get("/", (req,res) => {
           pSurName: row.pSurName,
           pLastName: row.pLastName,
           idDischs: row.idDischs,
-          Dischs: {
-            idDischs: row.idDischs,
-            disch: row.disch
-          },
-          idTeams: row.teams,
+          idTeams: row.idTeams,
           idKindOfSports: row.idKindOfSports,
-          KindOfSports: {
-            idKindOfSports: row.idKindOfSports,
-            kindofsport: row.kindofsport
-          },
           idRolls: row.idRolls,
-          Rolls: {
-            idRolls: row.idRolls,
-            roll: row.roll
-          }
         }
       })
   
